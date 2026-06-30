@@ -16,8 +16,12 @@
 
 class AppComponent {
 public:
+
+    const char* portEnv = std::getenv("PORT");
+    int port = portEnv ? std::stoi(portEnv) : 9000; // Default to 9000 if not set
+    //
     OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, serverConnectionProvider)(
-        oatpp::network::tcp::server::ConnectionProvider::createShared({"localhost", 9000, oatpp::network::Address::IP_4})
+        oatpp::network::tcp::server::ConnectionProvider::createShared({"0.0.0.0", (unsigned short)port, oatpp::network::Address::IP_4})
     );
 
     OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, httpRouter)(
