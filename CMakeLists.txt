@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 
 if(MSVC)
     set(CMAKE_C_COMPILER "cl.exe" CACHE FILEPATH "C compiler" FORCE)
-    set(CMAKE_CXX_COMPILER "cl.exe" CACHE FILEPATH "C++ compiler" FORCE)
-endif
+endif()
 
+if(MSVC)
+    set(CMAKE_CXX_COMPILER "cl.exe" CACHE FILEPATH "C++ compiler" FORCE)
+endif()
 set(OATPP_BUILD_TESTS OFF CACHE BOOL "Disable oatpp tests" FORCE)
 set(OATPP_BUILD_EXAMPLES OFF CACHE BOOL "Disable oatpp examples" FORCE)
 
