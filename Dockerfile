@@ -33,6 +33,8 @@ WORKDIR /app
 RUN --mount=type=bind,from=build,source=/app/build,target=/mnt/build \
     find /mnt/build -name "StudentManagement" -exec cp {} /app/StudentManagement \;
 
+COPY --from=build /app/Dependencies/oatpp-swagger/res /app/Dependencies/oatpp-swagger/res
+
 RUN chmod +x /app/StudentManagement
 
 EXPOSE 9000
