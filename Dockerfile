@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     libpq-dev \
     make \
+    ninja-build \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -14,8 +15,8 @@ COPY . .
 
 # Build your project
 RUN mkdir build && cd build && \
-    cmake .. && \
-    make
+    cmake .. -G "Ninja Multi-Config" && \
+    cmake --build . --config Release -j
 
 # Stage 2: Runtime
 FROM debian:bookworm-slim
@@ -25,9 +26,10 @@ RUN apt-get update && apt-get install -y libpq5 && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 # Copy the compiled binary from the build stage
-COPY --from=build /app/build/src/StudentManagement /app/StudentManagement
+RUN --mount=type=bind,from=build,source=/app/build,target=/mnt/build \
+    find /mnt/build -name "StudentManagement" -exec cp {} /app/StudentManagement \;
 
-# Expose the port (Render will inject the PORT environment variable)
+RUN chmod +x /app/StudentManagement
+
 EXPOSE 9000
-
 CMD ["/app/StudentManagement"]
