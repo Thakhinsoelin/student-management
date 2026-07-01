@@ -19,8 +19,12 @@ endif()
 add_library(bcrypt STATIC ${SRCFILES})
 
 # This makes sure the include folder is found by your main project
+#target_include_directories(bcrypt PUBLIC 
+#    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#)
+
 target_include_directories(bcrypt PUBLIC 
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # Apply your preferred C/C++ settings here
