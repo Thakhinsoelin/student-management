@@ -8,6 +8,7 @@
 #include <oatpp/web/server/api/ApiController.hpp>
 #include <oatpp/macro/codegen.hpp>
 #include <oatpp/macro/component.hpp>
+#include <oatpp-swagger/Generator.hpp>
 
 #include "bcrypt/BCrypt.hpp"
 

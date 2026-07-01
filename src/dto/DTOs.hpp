@@ -9,8 +9,9 @@ class MessageDTO : public oatpp::DTO {
     DTO_INIT(MessageDTO, DTO)
 
     DTO_FIELD(Int32, statusCode);
+    DTO_FIELD_INFO(statusCode) { info->required = true; }
     DTO_FIELD(String, message);
-
+    DTO_FIELD_INFO(message) { info->required = true; }
 };
 #include OATPP_CODEGEN_END(DTO)
 
@@ -37,7 +38,9 @@ class UserDTO: public oatpp::DTO {
     DTO_INIT(UserDTO, DTO)
 
     DTO_FIELD(String, name);
+    DTO_FIELD_INFO(name) { info->required = true; }
     DTO_FIELD(String, password);
+    DTO_FIELD_INFO(password) { info->required = true; }
 
 };
 #include OATPP_CODEGEN_END(DTO)

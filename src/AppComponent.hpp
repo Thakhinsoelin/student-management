@@ -68,10 +68,13 @@ public:
     // --- Swagger Components ---
     OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::swagger::DocumentInfo>, swaggerDocumentInfo)([] {
         oatpp::swagger::DocumentInfo::Builder builder;
+        const char* host = std::getenv("RENDER_EXTERNAL_URL"); 
+        std::string serverUrl = host ? host : "http://localhost:9000";
+
         builder.setTitle("Student Management System")
                .setDescription("API Documentation")
                .setVersion("1.0")
-               .addServer("http://localhost:9000", "server");
+               .addServer(serverUrl.c_str(), "Production Server");
         return builder.build();
     }());
 
