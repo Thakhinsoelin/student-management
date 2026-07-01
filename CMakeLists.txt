@@ -31,9 +31,13 @@ if(MSVC)
     )
 endif()
 
-set(PostgreSQL_ROOT "D:/Program Files/PostgreSQL/18")
-set(PostgreSQL_INCLUDE_DIR "D:/Program Files/PostgreSQL/18/include")
-set(PostgreSQL_LIBRARY "D:/Program Files/PostgreSQL/18/lib/libpq.lib")
+if(MSVC)
+    set(PostgreSQL_ROOT "D:/Program Files/PostgreSQL/18")
+    set(PostgreSQL_INCLUDE_DIR "D:/Program Files/PostgreSQL/18/include")
+    set(PostgreSQL_LIBRARY "D:/Program Files/PostgreSQL/18/lib/libpq.lib")
+else()
+    find_package(PostgreSQL REQUIRED)
+endif()
 
 add_subdirectory(Dependencies/oatpp)
 # IMPORTANT: Create the aliases that swagger is searching for

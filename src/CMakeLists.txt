@@ -27,12 +27,22 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # 4. Link everything
 # The 'glfw' and 'Vulkan::Vulkan' targets are globally available 
 # because they were defined in the root or via find_package.
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    oatpp
-    oatpp-swagger
-    oatpp-postgresql
-    bcrypt
-)
+if(MSVC)
+    target_link_libraries(${PROJECT_NAME} PRIVATE 
+        oatpp
+        oatpp-swagger
+        oatpp-postgresql
+        bcrypt
+    )
+else()
+    target_link_libraries(${PROJECT_NAME} PRIVATE 
+        oatpp
+        oatpp-swagger
+        oatpp-postgresql
+        PostgreSQL::PostgreSQL
+        bcrypt
+    )
+endif()
 
 if(WIN32)
     # Mandatorily link the Windows socket layer for network transactions
