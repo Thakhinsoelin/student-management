@@ -24,7 +24,7 @@ RUN mkdir build && cd build && \
 FROM fedora:latest
 
 # Install runtime dependencies (libpq)
-RUN dnf install -y libpq && dnf clean all
+RUN dnf install -y libpq libatomic && dnf clean all
 
 WORKDIR /app
 
